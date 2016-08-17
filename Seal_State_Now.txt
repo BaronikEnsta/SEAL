@@ -1,1 +1,0 @@
-Propeller_babore, Propeller_tribore, Propeller_front, Propeller_rear, External_pressure, Mission_departure, Azimuth, Pitch Angle, Roll Angle, Temperature

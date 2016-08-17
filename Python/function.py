@@ -12,22 +12,33 @@ import time
 global no_port_arduino
 no_port_arduino=0
 global baud_arduino
-baud_arduino=115200
+baud_arduino=57600
+global encoding_arduino
+encoding_arduino='ascii' #'utf-8'
+
 
 def requirement(tab) :
-	if len(tab) != 7 :
+	if len(tab) != 11 :
 		return False
 	for j in range ( 1, len(tab) ) :
 		if isinstance( tab[j] , int) != True :
 			return False
-	for i in range ( 1, 4 ) :
+	for i in range ( 2, 5 ) :
 		if tab[i]  > 100 and tab[i]  < -100 :
 			return False
 	
 
-def decode(bit) :
-	line = bit.decode('utf8')   #   'utf8'  'ascii'
-	tab = line.split(',' ,7)
+def decoding(bit) :
+	toto=str(bit)
+	"""print(bit)
+	print(toto)
+	print(len(bit))
+	print(toto[  toto.index("$INFO") : len(toto) -5 ])"""
+	"""line = bit.decode('ascii')   #   'utf8'  'ascii'	
+	#print(line[-line.index('$'):-1])
+	tab = line.split(',' ,11)"""
+	toto=toto[  toto.index("$INFO") : len(toto) -5 ]
+	tab = toto.split(',' , 13 )
 	for i in range (1,len(tab)) :
 		if isinstance( tab[i] , int) == True :
 			tab[i] = int( tab[i] )
@@ -39,13 +50,25 @@ def get_port():
 def get_baud():
 	return baud_arduino
 
+def get_encoding():
+	return encoding_arduino
+
 def read_serial( ser ):
 	#ser = serial.Serial(port='/dev/ttyACM{no_port}'.format(no_port=get_port()),baudrate=get_baud(),parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS)
+	
 	bit=ser.readline()
-	tab=decode(bit)
-	while tab[0] !="$INFO" and requirement(tab) == False:
+	toto=str(bit)
+	while ( toto.find("$INFO") == -1 ):
 		bit=ser.readline()
-		tab=decode(bit)
+		toto=str(bit)
+
+	tab=decoding(bit)
+	#ser.flush()
+	while tab[0] !="$INFO"  and requirement(tab) == False:
+		bit=ser.readline()
+		tab=decoding(bit)
+		#ser.flush()
+		#print("je boucle")
 	print(tab)
 	return tab
 	#print(len(tab))
