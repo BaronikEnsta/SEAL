@@ -6,51 +6,46 @@
 """
 """
 
-#from tkinter import Text, Tk, Frame
-from tkinter import*
+
+from tkinter import Text, Tk, Frame, Scrollbar
 import sys
 import os
-import tkinter.scrolledtext as tkst
 
+"""
 global autoscroll
 autoscroll = False
-
+"""
 def tail(f):
-	line = f.readline()
-	if line :
-		logfile.insert('end', line)
-		logfile.see(END)
-			
-	logfile.after(100, tail, f)
-	
-def tail1(f):
-	line = f.readline()
-	if line :
-		logfile.insert('end', line)
-			
-	logfile.after(100, tail, f)
-	
-
-
-def callback():
-	not(autoscroll)
+    line = f.readline()
+    while line:
+        logfile.insert('end', line)
+        logfile.see("end")
+        line = f.readline()
+    logfile.after(100, tail, f)
 
 
 root = Tk()
-logfile = tkst.ScrolledText(root, relief='ridge', bd=2)
-b = Button(root, text = "autoscroll", command = callback )
+""""
+def callback():
+	not(autoscroll)
+"""
+logframe = Frame(root, relief='ridge', bd=2)
+logframe.grid_rowconfigure(0, weight=1)
+logframe.grid_columnconfigure(0, weight=1)
+sb = Scrollbar(logframe)
+sb.grid(row=0, column=1, sticky='n s')
+logfile = Text(logframe, wrap='word', yscrollcommand=sb.set)
+logfile.grid(row=0, column=0, sticky='n s e w')
+sb.config(command=logfile.yview)
+logframe.pack()
+"""b = Button(root, text = "autoscroll", command = callback )
 b.pack(side=BOTTOM)
 b.config(state = ACTIVE)
-
-logfile.pack()
+"""
 termf = Frame(root, height=200, width=500, relief='ridge', bd=2)
-termf.pack(side=BOTTOM)
+termf.pack()
 wid = termf.winfo_id()
-os.system('xterm -into %d -geometry 500x200 -e python3 -i -c "import %s" &' % (wid, sys.argv[1]))
+os.system('urxvt -embed {} -geometry 500x200 -e python3 -i -c "from {} import*" &'.format(wid, sys.argv[1]))
 
-if autoscroll == True:
-	tail(open(sys.argv[2]))
-else :
-	tail1(open(sys.argv[2]))
+tail(open(sys.argv[2]))
 
-root.mainloop()

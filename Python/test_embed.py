@@ -35,8 +35,7 @@ logframe.pack()
 termf = Frame(root, height=200, width=500, relief='ridge', bd=2)
 termf.pack()
 wid = termf.winfo_id()
-os.system('xterm -into {} -geometry 500x200 -e python3 -i -c "import {}" &'.
-          format(wid, sys.argv[1]))
+os.system('urxvt -embed {} -geometry 500x200 -e python3 -i -c "import {}" &'.format(wid, sys.argv[1]))
 
 tail(open(sys.argv[2]))
 root.mainloop()
