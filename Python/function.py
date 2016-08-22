@@ -71,19 +71,13 @@ def read_serial( ser ):
 		#print("je boucle")
 	print(tab)
 	return tab
-	#print(len(tab))
-	#data1=[ int( tab[1] ), int( tab[2] ), int( tab[3] ), int( tab[4] ) ] 
-	#data2=tab[5]
-	#data3=tab[6]
-	#print(data1)
-	#print(data2)
-	#print(data3)
-	#ser.close()
-
-#class read_serial_thread(Thread):             # ser = serial.Serial(port='/dev/ttyACM0',baudrate=9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS)
-#	def __init__(self, ser):
-#		Thread.__init__(self)
-#		self.ser = ser 
-
-#	def run(self):
+	
+def decoding_joy(bit) :
+	toto=str(bit)
+	toto=toto[  toto.index("$JOY") : toto.index("*") ]
+	tab = toto.split(',' , 13 )
+	for i in range (1,len(tab)) :
+		if isinstance( tab[i] , int) == True :
+			tab[i] = int( tab[i] )
+	return tab
 		

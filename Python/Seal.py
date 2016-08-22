@@ -79,7 +79,7 @@ class Com(Thread):
 		byte=message.encode(get_encoding())
 		self.ser.write(byte)
 		print('code envoyé :  ' + str(byte) )
-		time.sleep(3)
+		#time.sleep(3)
 		print(self.chaine)
 
 
@@ -106,7 +106,7 @@ class Com(Thread):
 		order = ">>> " + Propeller_order
 		self.txt.write(order)
 		print('code envoyé :  ' + str(byte) )
-		time.sleep(3)
+		#time.sleep(3)
 		print(self.chaine)
 
 
@@ -129,7 +129,7 @@ class Com(Thread):
 		order = ">>> " + code
 		self.txt.write(order)
 		print('code envoyé :  ' + str(byte) )
-		time.sleep(3)
+		#time.sleep(3)
 		print(self.chaine)
 
 
@@ -152,7 +152,7 @@ class Com(Thread):
 		order = ">>> " + code
 		self.txt.write(order)
 		print('code envoyé :  ' + str(byte) )
-		time.sleep(3)
+		#time.sleep(3)
 		print(self.chaine)
 
 
@@ -175,7 +175,7 @@ class Com(Thread):
 		order = ">>> " + code
 		self.txt.write(order)
 		print('code envoyé :  ' + str(byte) )
-		time.sleep(3)
+		#time.sleep(3)
 		print(self.chaine)
 
 
