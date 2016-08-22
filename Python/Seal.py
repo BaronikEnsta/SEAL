@@ -62,6 +62,7 @@ class Com(Thread):
 
 		"""
 		print(self.chaine)
+		return(self.chaine)
 		
 
 	def send( self, message ):	
