@@ -1,6 +1,7 @@
 from serial import Serial
 
 class Joystick():
+
   def __init__(self, port, baud=57600):
     self.port = port
     self.baud = baud
@@ -13,13 +14,16 @@ class Joystick():
 
   def __enter__(self):
     self.open()
+    return self
 
-  def __exit__(self):
+  def __exit__(self, type, value, traceback):
     self.ser.close()
+    return True
 
   def __iter__(self):
-     return self
+    print("iter")
+    return self
 
-  def next(self):
-    s = ser.readline()
+  def __next__(self):
+    s = self.ser.readline()
     return s
