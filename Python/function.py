@@ -76,11 +76,12 @@ def decoding_joy(bit) :
 	toto=str(bit)
 	toto=toto[  toto.index("$JOY") : toto.index("*") ]
 	tab = toto.split(',' , 13 )
-	for i in range (1,len(tab)) :
-		if isinstance( tab[i] , int) == True :
-			tab[i] = int( tab[i] )
-	tab[1] = max( [ int( tab[1] ) - 5, -100 ]
-	tab[2] = max( [ int( tab[2] ) - 2, -100 ]
-	tab[3] = max( [ int( tab[3] ) - 5, -100 ]
+	#for i in range (1,len(tab)) :
+	#	if isinstance( tab[i] , int) == True :
+	#		tab[i] = int( tab[i] )
+	tab[1] = max( [ int( tab[1] ) - 5, -100 ] )
+	tab[2] = max( [ int( tab[2] ) - 2, -100 ] )
+	tab[3] = max( [ int( tab[3] ) - 5, -100 ] )
+	tab[4] = max( [ int( tab[4] ) - 5, -100 ] )
 	return tab
 		
