@@ -1,32 +1,34 @@
-#!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug 23 16:20:44 2016
+
+@author: kbaroni
+"""
 
 import socket
 import sys
-#sys.path
 from Seal import*
 from function  import*
 
-go=0
-hote = "172.20.10.6"
-port = 15555
-print( "Connection on {}".format(port) )
+socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket.bind(('', 15555))
+
+socket.listen(1)
+client, address = socket.accept()
+print("{} connected".format( address ) )
 
 s=Com()
 time.sleep(2)
 s.start()
 time.sleep(2)
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.connect((hote, port))
-time.sleep(2)
 s.atach()
 time.sleep(2)
 
-for line in socket.makefile():
+for line in client.makefile():
 	s.show()	
 	tab=decoding_joy(line)
 	print(tab)
-	if s.go != 0 :
+	if s.go == True :
 		propeller_babord = ( int( tab[1] ) + int( tab[2] ) ) / 2
 		propeller_tribord = ( int( tab[1] ) - int( tab[2] ) ) / 2
 		propeller_vertical = int( tab[4] )
@@ -35,5 +37,6 @@ for line in socket.makefile():
 		s.propellers(0,0,0,0)
 
 #s.close()
-print( "Close" )
+client.close()
 socket.close()
+print("Close")
