@@ -44,7 +44,15 @@ class Com(Thread):
 			self.txt.write(self.chaine)
 			try :
 				tab_info=decoding(self.chaine)
+<<<<<<< HEAD
 				self.go = False if int(tab_info[8]) > 0 else True
+=======
+<<<<<<< HEAD
+				self.go = False if int(tab_info[8]) > 0 else True
+=======
+				self.go = True if int(tab_info[8]) > 0 else False
+>>>>>>> origin/master
+>>>>>>> origin/master
 			except:
 				pass
 	
