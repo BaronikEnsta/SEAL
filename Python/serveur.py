@@ -24,11 +24,19 @@ time.sleep(2)
 s.atach()
 time.sleep(2)
 
+<<<<<<< HEAD
 for line in client.makefile():
 	s.show()	
 	tab=decoding_joy(line)
 	print(tab)
 	if s.go == True :
+=======
+for line in socket.makefile():
+	s.show()	
+	tab=decoding_joy(line)
+	print(tab)
+	if s.go != 0 :
+>>>>>>> origin/master
 		propeller_babord = ( int( tab[1] ) + int( tab[2] ) ) / 2
 		propeller_tribord = ( int( tab[1] ) - int( tab[2] ) ) / 2
 		propeller_vertical = int( tab[4] )
@@ -39,4 +47,8 @@ for line in client.makefile():
 #s.close()
 client.close()
 socket.close()
+<<<<<<< HEAD
 print("Close")
+=======
+print("Close")
+>>>>>>> origin/master
