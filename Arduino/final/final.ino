@@ -107,7 +107,7 @@ void serialEvent(){
     //Serial.println(inChar);
     inputString += inChar;                      // add it to the inputString:
     if (inChar == '\n' || inChar == '\r\n' )  {       // if the incoming character is a newline, set a flag
-      Serial.println(inputString);
+      //Serial.println(inputString);
       int index = inputString.indexOf('$');
       //Serial.println("index du $  ");Serial.println(index);
       inputString=inputString.substring(index);
@@ -115,7 +115,7 @@ void serialEvent(){
       break;
     }
   }
-  Serial.print("j'ai recu ca -> ");Serial.println(inputString);
+  //Serial.print("j'ai recu ca -> ");Serial.println(inputString);
   //Serial.println(stringComplete); 
 }
 
