@@ -6,7 +6,27 @@ import sys
 from joystick import Joystick
 
 go=0
+<<<<<<< HEAD
 hote = "172.20.10.5"
+=======
+<<<<<<< HEAD
+hote = "172.20.10.5"
+=======
+<<<<<<< HEAD
+hote = "172.20.10.5"
+=======
+<<<<<<< HEAD
+hote = "172.20.10.5"
+=======
+<<<<<<< HEAD
+hote = "172.20.10.5"
+=======
+hote = "127.0.0.1"
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
 port = 15555
 print( "Connection on {}".format(port) )
 
