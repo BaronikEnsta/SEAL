@@ -4,7 +4,7 @@ import sys
 from serial import*
 import serial
 from serial.serialposix import Serial, PosixPollSerial
-from function import *  # or import function as fct -> fct.requirement(tab)
+from function import*  # or import function as fct -> fct.requirement(tab)
 from threading import Thread, RLock
 
 class Com(Thread):
@@ -23,9 +23,11 @@ class Com(Thread):
 
 	def __init__( self ):
 		Thread.__init__(self)
-		self.txt = open("/home/pi/Documents/Python/Seal_Full_State.txt","w")
+		self.txt = open("/home/pi/Documents/SEAL/Python/Seal_Full_State.txt","w")
 		self.chaine=""
 		self.stop = False
+		self.daemon = True
+		self.go = False
 		#Ouverture du port serie
 		try :
 			#self.ser = serial.Serial(port='/dev/ttyACM0',baudrate=get_baud())
@@ -40,7 +42,11 @@ class Com(Thread):
 		while self.stop == False:
 			self.chaine = self.ser.readline().decode(get_encoding())
 			self.txt.write(self.chaine)
-		
+			try :
+				tab_info=decoding(self.chaine)
+				self.go = False if int(tab_info[8]) > 0 else True
+			except:
+				pass
 	
 	def show( self ):
 		"""Class for see one message send by Arduino for Raspberry PI 3.
